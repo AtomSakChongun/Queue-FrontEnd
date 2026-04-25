@@ -1,0 +1,191 @@
+:host {
+  display: block;
+  height: 100vh;
+  width: 100%;
+}
+
+.kiosk-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f8faff 0%, #dbeafe 100%);
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.kiosk-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .badge {
+    background: white;
+    padding: 0.5rem 1.2rem;
+    border-radius: 999px;
+    font-weight: 600;
+    color: #1e40af;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+}
+
+.welcome-section {
+  text-align: center;
+  margin: 3rem 0;
+  h1 {
+    color: #1e3a8a;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 800;
+  }
+  p {
+    color: #64748b;
+    font-size: 1.1rem;
+  }
+}
+
+.main-card {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  .card-content {
+    background: white;
+    width: 100%;
+    max-width: 450px;
+    border-radius: 2rem;
+    padding: 3rem 2rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 5px solid #1e40af;
+  }
+}
+
+.ticket-circle-btn {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: #2563eb;
+  border: none;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 15px 30px rgba(37, 99, 235, 0.4);
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-5px);
+    background: #1d4ed8;
+    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.5);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  .th-label { font-size: 2rem; font-weight: bold; margin: 5px 0; }
+  .en-label { font-size: 1rem; letter-spacing: 1px; opacity: 0.9; }
+}
+
+.clock-display {
+  margin-top: 3rem;
+  text-align: center;
+  small { color: #94a3b8; letter-spacing: 2px; font-weight: 600; }
+  .time-value {
+    color: #1e3a8a;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-top: 0.5rem;
+  }
+}
+
+.kiosk-footer {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem;
+
+  .reset-action-btn {
+    background: white;
+    border: 1px solid #e2e8f0;
+    padding: 0.75rem 2rem;
+    border-radius: 0.75rem;
+    color: #475569;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover { background: #f8fafc; border-color: #cbd5e1; }
+  }
+}
+/* ปุ่มฟันเฟือง */
+.settings-btn {
+  background: white;
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #64748b;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  &:hover { color: #1e40af; }
+}
+
+/* Modal Styling */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* พื้นหลังดำโปร่งแสง */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px); /* ทำพื้นหลังเบลอ */
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  width: 90%;
+  max-width: 350px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+
+  h3 { margin-bottom: 1.5rem; color: #1e3a8a; }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+    label { display: block; margin-bottom: 0.5rem; color: #64748b; font-size: 0.9rem; }
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      font-size: 1.2rem;
+      box-sizing: border-box;
+      text-align: center;
+      &:focus { outline: 2px solid #2563eb; }
+    }
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 10px;
+    button {
+      flex: 1;
+      padding: 10px;
+      border-radius: 0.5rem;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .cancel-btn { background: #f1f5f9; color: #64748b; }
+    .save-btn { background: #2563eb; color: white; }
+  }
+}

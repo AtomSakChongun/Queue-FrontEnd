@@ -1,0 +1,43 @@
+<div class="kiosk-container">
+  <header class="kiosk-header">
+    <div class="badge">เลขเครื่อง: {{ machineId }}</div>
+    <button class="settings-btn" (click)="openSettings()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+      </svg>
+    </button>
+  </header>
+
+  <section class="welcome-section">
+    <h1>Welcome to our service</h1>
+    <p>Tap the button below to get your ticket.</p>
+  </section>
+
+  <main class="main-card">
+    <div class="card-content">
+      <button class="ticket-circle-btn" (click)="handleGetTicket()">
+        <span class="th-label">รับบัตรคิว</span>
+        <span class="en-label">GET TICKET</span>
+      </button>
+      <div class="clock-display">
+        <small>CURRENT TIME</small>
+        <div class="time-value">{{ currentTime | date:'HH:mm' }}</div>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal-overlay" *ngIf="isSettingsOpen">
+    <div class="modal-content">
+      <h3>ตั้งค่าเลขเครื่อง</h3>
+      <div class="form-group">
+        <label>หมายเลขเครื่อง (Machine ID)</label>
+        <input type="text" [(ngModel)]="tempMachineId" placeholder="เช่น 01, 02">
+      </div>
+      <div class="modal-actions">
+        <button class="cancel-btn" (click)="closeSettings()">ยกเลิก</button>
+        <button class="save-btn" (click)="saveSettings()">บันทึก</button>
+      </div>
+    </div>
+  </div>
+</div>
