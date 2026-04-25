@@ -1,0 +1,141 @@
+.admin-container {
+  min-height: 100vh;
+  background: #f1f5f9;
+  padding: 40px 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+.page-title {
+  text-align: center;
+  margin-bottom: 30px;
+
+  h2 {
+    font-size: 28px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 6px;
+  }
+
+  p {
+    font-size: 14px;
+    color: #94a3b8;
+    margin: 0;
+  }
+}
+
+.active-ticket-card {
+  background: white;
+  border-radius: 20px;
+  padding: 36px 24px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border-left: 6px solid #1d4ed8;
+  margin-bottom: 20px;
+
+  .label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #1d4ed8;
+    margin: 0 0 8px;
+  }
+
+  .queue-number {
+    font-size: 96px;
+    font-weight: 900;
+    color: #1d4ed8;
+    line-height: 1;
+    margin: 12px 0 20px;
+  }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #dbeafe;
+    color: #1e40af;
+    padding: 6px 18px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: #1e40af;
+      border-radius: 50%;
+    }
+  }
+}
+
+.action-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.action-item {
+  width: 100%;
+  background: white;
+  border: none;
+  border-radius: 16px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: background 0.15s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+  &:hover {
+    background: #f8fafc;
+  }
+
+  .icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .reset-bg {
+    background: #fff1f2;
+  }
+
+  .gray-bg {
+    background: #f1f5f9;
+  }
+
+  .blue-bg {
+    background: #dbeafe;
+  }
+
+  .text {
+    flex: 1;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    .main-text {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    .sub-text {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+  }
+
+  .arrow {
+    color: #cbd5e1;
+    font-size: 22px;
+    font-weight: 300;
+  }
+}

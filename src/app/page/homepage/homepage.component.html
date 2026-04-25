@@ -16,28 +16,39 @@
 
   <main class="main-card">
     <div class="card-content">
-      <button class="ticket-circle-btn" (click)="handleGetTicket()">
-        <span class="th-label">รับบัตรคิว</span>
-        <span class="en-label">GET TICKET</span>
-      </button>
+
+      @if (!showQueue) {
+        <button class="ticket-circle-btn" (click)="handleGetTicket()">
+          <span class="th-label">รับบัตรคิว</span>
+          <span class="en-label">GET TICKET</span>
+        </button>
+      }
+
+      @if (showQueue) {
+        <app-ticket-queue [queueNumber]="ticketNumber" (onDone)="switchToHome()" />
+      }
+
       <div class="clock-display">
         <small>CURRENT TIME</small>
         <div class="time-value">{{ currentTime | date:'HH:mm' }}</div>
       </div>
+
     </div>
   </main>
 
-  <div class="modal-overlay" *ngIf="isSettingsOpen">
-    <div class="modal-content">
-      <h3>ตั้งค่าเลขเครื่อง</h3>
-      <div class="form-group">
-        <label>หมายเลขเครื่อง (Machine ID)</label>
-        <input type="text" [(ngModel)]="tempMachineId" placeholder="เช่น 01, 02">
-      </div>
-      <div class="modal-actions">
-        <button class="cancel-btn" (click)="closeSettings()">ยกเลิก</button>
-        <button class="save-btn" (click)="saveSettings()">บันทึก</button>
+  @if (isSettingsOpen) {
+    <div class="modal-overlay">
+      <div class="modal-content">
+        <h3>ตั้งค่าเลขเครื่อง</h3>
+        <div class="form-group">
+          <label>หมายเลขเครื่อง (Machine ID)</label>
+          <input type="text" [(ngModel)]="tempMachineId" placeholder="เช่น 01, 02">
+        </div>
+        <div class="modal-actions">
+          <button class="cancel-btn" (click)="closeSettings()">ยกเลิก</button>
+          <button class="save-btn" (click)="saveSettings()">บันทึก</button>
+        </div>
       </div>
     </div>
-  </div>
+  }
 </div>
