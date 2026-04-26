@@ -1,59 +1,127 @@
-# QueueApp
+# Queue App 🎫
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.8.
+ระบบจัดการคิวแบบ Real-time สำหรับ Kiosk โดยใช้ Angular และ WebSocket
 
-## Development server
+---
 
-To start a local development server, run:
+## Features
 
-```bash
-ng serve
-```
+- **รับบัตรคิว** — กดรับคิวผ่านหน้าจอ Kiosk
+- **Real-time Queue Update** — อัปเดตหมายเลขคิวแบบ Real-time ผ่าน WebSocket
+- **รับคิวถัดไป** — เรียกคิวถัดไปได้ทันที
+- **Reset คิว** — ล้างคิวทั้งหมดได้จากหน้าจอ
+- **ตั้งค่าหมายเลขเครื่อง** — กำหนด Machine ID สำหรับแต่ละเครื่อง Kiosk
+- **Auto Reconnect** — WebSocket เชื่อมต่อใหม่อัตโนมัติเมื่อหลุด
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## Tech Stack
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+| Layer     | Technology                        |
+|-----------|-----------------------------------|
+| Frontend  | Angular 21, TypeScript, RxJS      |
+| Styling   | SCSS, Tailwind CSS 4              |
+| Transport | WebSocket (`ws://localhost:3000/ws`) |
+| Server    | Nginx (production)                |
+| Container | Docker, Docker Compose            |
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Prerequisites
 
-```bash
-ng generate --help
-```
+- [Node.js](https://nodejs.org/) v22+
+- [Docker](https://www.docker.com/) (สำหรับ deploy ด้วย container)
+- Backend WebSocket server ที่รันอยู่บน `ws://localhost:3000/ws`
 
-## Building
+---
 
-To build the project run:
+## Getting Started
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+### Development
 
 ```bash
-ng e2e
+npm install
+npm start
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+เปิดเบราว์เซอร์ที่ `http://localhost:4200`
 
-## Additional Resources
+### Build
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+npm run build
+```
+
+ไฟล์ที่ build แล้วจะอยู่ใน `dist/queue-app/browser/`
+
+---
+
+## Docker
+
+### Build & Run ด้วย Docker Compose
+
+```bash
+docker-compose up -d
+```
+
+แอปจะรันที่ `http://localhost:4200`
+
+### Build Image เอง
+
+```bash
+docker build -t queue-app .
+docker run -p 4200:80 queue-app
+```
+
+> **หมายเหตุ:** Nginx จะ proxy WebSocket request จาก `/ws` ไปยัง `host.docker.internal:3000/ws` โดยอัตโนมัติ
+
+---
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── page/
+│   │   └── homepage/
+│   │       ├── homepage.component.*     # หน้าหลัก Kiosk
+│   │       └── component/
+│   │           └── queue.component.*    # แสดงหมายเลขคิวและ actions
+│   ├── app.routes.ts
+│   └── app.config.ts
+└── service/
+    └── socket.service.ts                # WebSocket service (take / reset)
+```
+
+---
+
+## WebSocket Protocol
+
+Service ส่ง payload ไปยัง backend ในรูปแบบ:
+
+```json
+{ "client_id": "01", "action": "take" }
+{ "client_id": "01", "action": "reset" }
+```
+
+Backend ตอบกลับในรูปแบบ:
+
+```json
+{ "queue": "42" }
+```
+
+---
+
+## Configuration
+
+### Machine ID
+
+กดไอคอน มุมบนขวาของหน้าจอเพื่อตั้งค่า Machine ID (ค่าเริ่มต้น: `01`)
+
+### WebSocket URL
+
+แก้ไข URL ใน `src/service/socket.service.ts`:
+
+```typescript
+this.socket = new WebSocket('ws://localhost:3000/ws');
+```
