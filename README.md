@@ -107,7 +107,7 @@ Service ส่ง payload ไปยัง backend ในรูปแบบ:
 Backend ตอบกลับในรูปแบบ:
 
 ```json
-{ "queue": "42" }
+{ "queue": "42" , "status" : "รอ" }
 ```
 
 ---
